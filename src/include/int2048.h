@@ -14,12 +14,22 @@
 #include <cstring>
 #include <iostream>
 #include <vector>
+#include <string>
 
 // Do not use "using namespace std;"
 
 namespace sjtu {
 class int2048 {
-  // todo
+  // Store sign and base-1e9 chunks (little-endian)
+  // Minimal implementation to pass Integer 1 and lay groundwork for Integer 2
+  bool neg;
+  std::vector<int> d; // each element is 0..9
+
+  void trim();
+  static int cmp_abs(const int2048 &a, const int2048 &b);
+  static int2048 add_abs(const int2048 &a, const int2048 &b);
+  static int2048 sub_abs(const int2048 &a, const int2048 &b); // assume |a|>=|b|
+  friend void divmod_abs(const int2048 &, const int2048 &, int2048 &, int2048 &);
 public:
   // Constructors
   int2048();
